@@ -365,4 +365,9 @@ class ServerRequest extends Request implements ServerRequestInterface
 
         return $new;
     }
+
+    public function getPostParam(string $name)
+    {
+        return isset($this->parsedBody[$name]) ? $this->parsedBody[$name] : null;
+    }
 }
