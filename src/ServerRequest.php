@@ -371,6 +371,11 @@ class ServerRequest extends Request implements ServerRequestInterface
         return isset($this->parsedBody[$name]) ? $this->parsedBody[$name] : null;
     }
 
+    public function hasQueryParam(string $name) : bool
+    {
+        return isset($this->queryParams[$name]);
+    }
+
     public function getQueryParam(string $name)
     {
         return isset($this->queryParams[$name]) ? $this->queryParams[$name] : null;
