@@ -54,6 +54,8 @@ class ServerRequest extends Request implements ServerRequestInterface
      */
     private $uploadedFiles = [];
 
+    private $body = null;
+
     /**
      * @param string                               $method       HTTP method
      * @param string|UriInterface                  $uri          URI
@@ -366,18 +368,28 @@ class ServerRequest extends Request implements ServerRequestInterface
         return $new;
     }
 
-    public function getPostParam(string $name)
+    public function getPostParam(string $name): ?string
     {
         return isset($this->parsedBody[$name]) ? $this->parsedBody[$name] : null;
     }
 
-    public function hasQueryParam(string $name) : bool
+    public function hasQueryParam(string $name): bool
     {
         return isset($this->queryParams[$name]);
     }
 
-    public function getQueryParam(string $name)
+    public function getQueryParam(string $name): ?string
     {
         return isset($this->queryParams[$name]) ? $this->queryParams[$name] : null;
+    }
+
+    public function getBodyContents(): string
+    {
+        if (is_null($this->body)) {
+            $body = clone $this->getBody();
+            $this->body = $body->getContents();
+        }
+
+        return $this->body;
     }
 }
