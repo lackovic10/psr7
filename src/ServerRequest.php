@@ -383,10 +383,11 @@ class ServerRequest extends Request implements ServerRequestInterface
         return isset($this->queryParams[$name]) ? $this->queryParams[$name] : null;
     }
 
-    public function getRequestBody(): string
+    public function getBodyContents(): string
     {
         if (is_null($this->body)) {
-            $this->body = $this->getBody()->getContents();
+            $body = (clone) $this->getBody();
+            $this->body = $body->getContents();
         }
 
         return $this->body;
