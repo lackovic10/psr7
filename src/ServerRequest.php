@@ -368,7 +368,7 @@ class ServerRequest extends Request implements ServerRequestInterface
         return $new;
     }
 
-    public function getPostParam(string $name): ?string
+    public function getPostParam(string $name)
     {
         return isset($this->parsedBody[$name]) ? $this->parsedBody[$name] : null;
     }
@@ -378,7 +378,7 @@ class ServerRequest extends Request implements ServerRequestInterface
         return isset($this->queryParams[$name]);
     }
 
-    public function getQueryParam(string $name): ?string
+    public function getQueryParam(string $name)
     {
         return isset($this->queryParams[$name]) ? $this->queryParams[$name] : null;
     }
